@@ -19,7 +19,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20 
+          node-version: 24
           cache: 'npm'
 
       - name: Install dependencies
@@ -37,7 +37,7 @@ jobs:
         with:
           # In modern Angular, it's often just dist/[project-name]
           # Check your terminal logs for 'Check build output' to confirm
-          path: dist/6MWT/
+          path: dist/walk_calc/
           
       - name: Deploy to GitHub Pages
         id: deployment
