@@ -1,12 +1,11 @@
 import { Component, signal } from '@angular/core';
-import { NgbNav } from '@ng-bootstrap/ng-bootstrap/nav';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [FormsModule, NgbNav, NgbModule],
+  imports: [FormsModule, NgbModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
