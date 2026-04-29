@@ -19,21 +19,26 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 20 
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci # This is like 'npm install' but faster for CI/CD
+        run: npm ci
 
       - name: Build Angular
         run: npx ng build --configuration production --base-href /6MWT/
 
+      # This step helps us debug by showing exactly where the files are
+      - name: Check build output
+        run: ls -R dist/
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Change 'walk-calc' to the folder name found inside your /dist folder
-          path: dist/walk-calc/browser/ 
-
+          # In modern Angular, it's often just dist/[project-name]
+          # Check your terminal logs for 'Check build output' to confirm
+          path: dist/walk-calc/
+          
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
