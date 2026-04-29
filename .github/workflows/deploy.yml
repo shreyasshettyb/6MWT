@@ -37,7 +37,7 @@ jobs:
         with:
           # In modern Angular, it's often just dist/[project-name]
           # Check your terminal logs for 'Check build output' to confirm
-          path: dist/walk_calc/
+          path: dist/walk_calc//browser
           
       - name: Deploy to GitHub Pages
         id: deployment
