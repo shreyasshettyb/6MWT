@@ -1,8 +1,8 @@
-name: Deploy to GitHub Pages
+name: Deploy Angular to GitHub Pages
 
 on:
   push:
-    branches: ["main"] 
+    branches: ["main"]
 
 permissions:
   contents: read
@@ -10,19 +10,29 @@ permissions:
   id-token: write
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18 # Use the version matching your local setup
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci # This is like 'npm install' but faster for CI/CD
+
+      - name: Build Angular
+        run: npx ng build --configuration production --base-href /6MWT/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.' # This tells GitHub to upload everything in your folder
+          # Change 'walk-calc' to the folder name found inside your /dist folder
+          path: dist/walk-calc/browser/ 
 
       - name: Deploy to GitHub Pages
         id: deployment
